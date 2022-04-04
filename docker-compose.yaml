@@ -1,0 +1,41 @@
+version: '3'
+
+services:
+  back:
+    build:
+      context: ./backend
+    command: python manage.py runserver 0.0.0.0:8000
+    container_name: volunter_portal
+    volumes:
+      - ./backend:/app
+      - static:/app/files/static
+      - media:/app/files/media
+    ports:
+      - 8000:8000
+    depends_on:
+      - db
+    restart: always
+    networks:
+      - union-network 
+
+
+  db:
+    image: postgres:12.0-alpine
+    volumes:
+      - ./db:/db
+      - postgres_volume:/var/lib/postgresql/data/
+    environment:
+      - POSTGRES_USER=django_user
+      - POSTGRES_PASSWORD=django_password
+      - POSTGRES_DB=django_db
+    networks:
+      - union-network
+
+
+volumes:
+  postgres_volume:
+  static:
+  media:
+
+networks:
+  union-network:

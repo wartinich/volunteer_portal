@@ -1,0 +1,43 @@
+# dependencies
+/node_modules
+/.pnp
+.pnp.js
+
+# testing
+/coverage
+
+# production
+/build
+
+/db
+
+# misc
+.DS_Store
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+.idea
+.idea/
+idea
+
+*.egg-info/
+.installed.cfg
+*.egg
+
+dist
+db.sqlite3
+
+__pycache__/
+*/__pycache__/
+*.py[cod]
+.pyc
+*.pyc
+
+!*media/.gitkeep
+media/*
