@@ -1,7 +1,7 @@
 from rest_framework import generics, permissions, filters
-from base.permissions import IsAuthor
-from assistances.api.serializers import CreateAidSerializer, AidSerializer, DetailAidSerializer
-from assistances.models import Aid
+from apps.base.permissions import IsAuthor
+from apps.assistances.api.serializers import CreateAidSerializer, AidSerializer, DetailAidSerializer
+from apps.assistances.models import Aid
 
 
 class CreateAidView(generics.CreateAPIView):
