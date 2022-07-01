@@ -1,5 +1,5 @@
 from django.contrib import admin
-from assistances.models import Category, Aid
+from apps.assistances.models import Category, Aid
 
 
 @admin.register(Category)

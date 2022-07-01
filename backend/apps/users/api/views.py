@@ -1,7 +1,7 @@
 from rest_framework import generics, filters
-from base.permissions import IsAuthor
-from users.api.serializers import UserProfileSerializer, UpdateUserProfileSerializer, UserListSerializer
-from users.models import User
+from apps.base.permissions import IsAuthor
+from apps.users.api.serializers import UserProfileSerializer, UpdateUserProfileSerializer, UserListSerializer
+from apps.users.models import User
 
 
 class UserListView(generics.ListAPIView):

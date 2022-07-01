@@ -1,5 +1,5 @@
 from django.urls import path
-from assistances.api.views import CreateAidView, ListAidView, UpdateAidView, DetailAidView
+from apps.assistances.api.views import CreateAidView, ListAidView, UpdateAidView, DetailAidView
 
 
 urlpatterns = [

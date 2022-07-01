@@ -1,6 +1,6 @@
 from rest_framework import generics, permissions
-from comments.api.serializers import CreateCommentSerializer
-from comments.models import Comment
+from apps.comments.api.serializers import CreateCommentSerializer
+from apps.comments.models import Comment
 
 
 class CreateCommentView(generics.CreateAPIView):
