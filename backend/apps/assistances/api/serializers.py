@@ -1,7 +1,7 @@
 from rest_framework import serializers
-from assistances.models import Aid, Category
-from comments.api.serializers import CommentSerializer
-from base.serializers import UserInfoSerializer
+from apps.assistances.models import Aid, Category
+from apps.comments.api.serializers import CommentSerializer
+from apps.base.serializers import UserInfoSerializer
 
 
 class CategorySerializer(serializers.ModelSerializer):
