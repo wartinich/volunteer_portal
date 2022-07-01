@@ -1,13 +1,9 @@
 FROM python:3.8
 
-RUN mkdir /app
+WORKDIR /back
 
-COPY ./requirements.txt /app
+COPY ./req.txt /back
 
-WORKDIR /app
+RUN pip install -r req.txt --no-cache-dir
 
-RUN pip install -r requirements.txt --no-cache-dir
-
-COPY . /app
-
-RUN chmod 755 /app/prestart.sh
+COPY . /back
