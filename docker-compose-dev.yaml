@@ -1,0 +1,17 @@
+version: '3'
+
+services:
+  db:
+    image: postgres:12.0-alpine
+    volumes:
+      - ./db:/db
+      - postgres_volume:/var/lib/postgresql/data/
+    environment:
+      - POSTGRES_USER=django_user
+      - POSTGRES_PASSWORD=django_password
+      - POSTGRES_DB=django_db
+    ports:
+      - 5432:5432
+
+volumes:
+  postgres_volume:
