@@ -9,7 +9,7 @@ services:
     environment:
       - POSTGRES_USER=django_user
       - POSTGRES_PASSWORD=django_password
-      - POSTGRES_DB=django_db
+      - POSTGRES_DB=portal_db
     ports:
       - 5432:5432
 

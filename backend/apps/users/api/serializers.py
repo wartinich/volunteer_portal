@@ -1,6 +1,6 @@
 from rest_framework import serializers
-from assistances.api.serializers import DetailAidSerializer
-from users.models import User
+from apps.assistances.api.serializers import DetailAidSerializer
+from apps.users.models import User
 
 
 class UserListSerializer(serializers.ModelSerializer):

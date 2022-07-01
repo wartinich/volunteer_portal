@@ -1,7 +1,7 @@
 from rest_framework import serializers
 
-from base.serializers import UserInfoSerializer, RecursiveSerializer
-from comments.models import Comment
+from apps.base.serializers import UserInfoSerializer, RecursiveSerializer
+from apps.comments.models import Comment
 
 
 class CreateCommentSerializer(serializers.ModelSerializer):
