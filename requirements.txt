@@ -1,0 +1,8 @@
+Django
+django-mptt
+Pillow
+djangorestframework
+django-filter
+django-rest-swagger
+psycopg2-binary
+python-dotenv
