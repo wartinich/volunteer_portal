@@ -41,7 +41,7 @@ INSTALLED_APPS = [
     'user',
     'user_profile',
     'assistance',
-    'petitions'
+    'petition'
 ]
 
 MIDDLEWARE = [
