@@ -36,9 +36,6 @@ class RegisterView(CreateView):
 class CustomLoginView(LoginView):
     template_name = 'authentication/login.html'
 
-    def get_success_url(self):
-        return reverse_lazy("authentication:sign_up")
-
 
 class CustomLogoutView(LogoutView):
     @method_decorator(never_cache)

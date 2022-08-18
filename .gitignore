@@ -2,7 +2,13 @@
 .ipynb_checkpoints
 .mypy_cache
 .vscode
-__pycache_/
+
+__pycache__/
+*/__pycache__/
+*.py[cod]
+.pyc
+*.pyc
+
 .env
 env
 venv
