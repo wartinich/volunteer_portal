@@ -33,7 +33,6 @@ class ProfileUpdateView(LoginRequiredMixin, UpdateView):
 
     def form_valid(self, form):
         form = super().form_valid(form)
-
         message = "Personal Information has been updated"
         messages.success(request=self.request, message=message)
         return form
@@ -47,7 +46,6 @@ class CustomPasswordChangeView(LoginRequiredMixin, PasswordChangeView):
 
     def form_valid(self, form):
         form = super().form_valid(form)
-
         message = "The password has been successfully updated"
         messages.success(request=self.request, message=message)
         return form
