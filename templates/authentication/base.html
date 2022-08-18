@@ -8,9 +8,10 @@
     <title>{% block title %}{% endblock %}</title>
     <link rel="stylesheet" href="{% static "css/flowbite.min.css" %}">
 </head>
-<body class="m-0 p-0 h-screen">
-    {% block content %}{% endblock %}
-
+<body>
+    <div class="m-0 p-0 h-screen flex justify-center items-center">
+        {% block form %}{% endblock %}
+    </div>
     <script src="{% static "js/flowbite.js" %}"></script>
     <script src="{% static "js/datepicker.js" %}"></script>
 </body>

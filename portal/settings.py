@@ -88,6 +88,12 @@ DATABASES = {
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
 
+AUTH_USER_MODEL = "authentication.User"
+
+LOGIN_URL = "authentication:login"
+LOGIN_REDIRECT_URL = "user_profile:profile"
+LOGOUT_REDIRECT_URL = "authentication:login"
+
 AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
