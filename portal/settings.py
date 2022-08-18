@@ -32,6 +32,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    'mptt',
     'rest_framework',
     'rest_framework_swagger',
     'django_filters',
