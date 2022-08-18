@@ -1,0 +1,10 @@
+{% extends 'user_profile/base.html' %}
+
+{% block user_short %}
+    <div class="mt-6 p-4 max-w-sm h-max bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
+        <img class="w-full h-max rounded-full" src="https://flowbite.com/docs/images/people/profile-picture-5.jpg" alt="Default avatar">
+        <div class="pt-4">
+            <h1>{{ user.full_name }}</h1>
+        </div>
+    </div>
+{% endblock %}

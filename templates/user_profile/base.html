@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block title %}Profile{% endblock %}
+
+{% block content %}
+    <div class="container mx-auto flex">
+        {% block user_short %}{% endblock %}
+        {% block user_detail %}{% endblock %}
+    </div>
+{% endblock %}
