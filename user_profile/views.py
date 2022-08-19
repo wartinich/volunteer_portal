@@ -19,7 +19,6 @@ class ProfileView(LoginRequiredMixin, TemplateView):
 
         return context
 
-
 class ProfileUpdateView(LoginRequiredMixin, UpdateView):
     """Update user data"""
 
