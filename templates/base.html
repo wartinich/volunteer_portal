@@ -2,6 +2,8 @@
 <!doctype html>
 <html lang="en">
 <head>
+    <base href="../">
+
     <meta charset="UTF-8">
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
@@ -9,11 +11,14 @@
     <link rel="stylesheet" href="{% static "css/flowbite.min.css" %}">
 </head>
 <body class="m-0 p-0 h-screen">
+
+    {% include 'include/header.html' %}
+
     <div class="container mx-auto flex">
         {% block content %}{% endblock %}
     </div>
 
-    <script src="{% static "js/flowbite.js" %}"></script>
-    <script src="{% static "js/datepicker.js" %}"></script>
+<script src="{% static "js/flowbite.js" %}"></script>
+<script src="{% static "js/datepicker.js" %}"></script>
 </body>
 </html>
