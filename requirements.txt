@@ -7,3 +7,5 @@ django-rest-swagger
 psycopg2-binary
 python-dotenv
 flake8
+pytest-django
+mixer
