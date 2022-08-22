@@ -1,3 +1,27 @@
-from django.shortcuts import render
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.shortcuts import get_object_or_404
+from django.views.generic import ListView, DetailView
 
-# Create your views here.
+from authentication.models import User
+
+
+class UserListView(LoginRequiredMixin, ListView):
+    """Get list of user"""
+
+    model = User
+    template_name = "user/user_list.html"
+
+    def get_queryset(self):
+        queryset = self.model.objects.all()
+        return queryset
+
+
+class UserDetailView(LoginRequiredMixin, DetailView):
+    """Get user data"""
+
+    model = User
+    template_name = "user/user_detail.html"
+    context_object_name = "user"
+
+    def get_queryset(self):
+        return get_object_or_404(self.model, pk=self.kwargs["pk"])
