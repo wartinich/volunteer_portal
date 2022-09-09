@@ -6,6 +6,9 @@ The file contains important changes from version to version.
 
 ### Features
 
+* `Follower`
+  * Add the ability to add, remove follower
+
 * `User profile`
   * Add the ability to view and change personal info
   * Add the ability to change password
