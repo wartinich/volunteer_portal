@@ -1,35 +1,42 @@
-{% extends 'user_profile/base.html' %}
+{% extends 'user_profile/base_update.html' %}
 
-{% block form %}
-    <div style="width: 70%; height: max-content;" class="mt-6 ml-6 m-auto w-2/4 p-4 bg-white rounded-lg border border-gray-200 shadow-md">
+{% block active_edit_profile_item %}font-medium{% endblock active_edit_profile_item %}
+
+{% block edit %}
+    <div style="width: 80%;"
+         class="w-max m-auto w-2/4 rounded-r-lg p-4 bg-white">
         <form method="post" enctype="multipart/form-data">
             {% csrf_token %}
-            <h3 class="mt-1 text-2xl uppercase font-medium text-gray-500">Update profile</h3>
-            <div class="mt-3">
-                <div class="mb-2 grid md:grid-cols-2 md:gap-6">
+            <div>
+                <div>
+{#                    <img src="{{ user.user_photo.url }}" alt="">#}
+                    <label class="text-sm font-medium text-blue-600" for="photo">Change profile photo</label>
+                    <input type="file" name="user_photo" id="photo" style="display: none">
+                </div>
+                <div class="mt-2 grid md:grid-cols-2 md:gap-6">
                     <div>
-                        <label for="first_name" class="block mb-2 text-lg font-medium text-gray-900 dark:text-gray-300">First
+                        <label for="first_name" class="block text-base font-medium text-gray-900">First
                             name</label>
                         <input type="text" name="first_name" id="first_name" placeholder="Joe"
-                               class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                               class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2"
                                value="{{ user.first_name }}">
                     </div>
-                    <div>
-                        <label for="last_name" class="block mb-2 text-lg font-medium text-gray-900 dark:text-gray-300">Last
+                    <div class="">
+                        <label for="last_name" class="block text-base font-medium text-gray-900">Last
                             name</label>
                         <input type="text" name="last_name" id="last_name" placeholder="Doe"
-                               class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                               class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2"
                                value="{{ user.last_name }}">
                     </div>
                 </div>
-                <div class="mb-2">
-                    <label for="email" class="block mt-2 mb-2 text-lg font-medium text-gray-900 dark:text-gray-300">Email</label>
+                <div class="mt-2">
+                    <label for="email" class="block text-base font-medium text-gray-900">Email</label>
                     <input type="email" name="email" id="email"
-                       class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
-                       placeholder="email@gmail.com" value="{{ user.email }}">
+                           class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2"
+                           placeholder="email@gmail.com" value="{{ user.email }}">
                 </div>
-                <div class="mb-2 relative">
-                    <label for="date_of_birth" class="block mt-2 mb-2 text-lg font-medium text-gray-900 dark:text-gray-300">Date
+                <div class="mt-2 relative">
+                    <label for="date_of_birth" class="block text-base font-medium text-gray-900 dark:text-gray-300">Date
                         of birth</label>
                     <div>
                         <div class="flex absolute left-0 items-center pl-3 pointer-events-none" style="top: 55%;">
@@ -41,23 +48,17 @@
                             </svg>
                         </div>
                         <input datepicker name="birth_date" id="date_of_birth" type="text"
-                               class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                               class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2"
                                placeholder="Select date" value="{{ user.birth_date }}">
                     </div>
                 </div>
             </div>
-            <div class="mt-3 flex justify-end">
-                <a href="{% url "user_profile:profile" %}" class="text-white bg-red-700 hover:bg-red-800 font-medium rounded-lg text-sm px-5 py-2.5 mr-2">
-                    Cancel
-                </a>
-                <a href="{% url "user_profile:password-change" %}"
-                   class="text-white bg-yellow-400 hover:bg-yellow-500 font-medium rounded-lg text-sm px-5 py-2.5 mr-2">
-                    Change password
-                </a>
-                <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
-                    Update
+            <div class="mt-4 flex justify-start">
+                <button type="submit"
+                        class="text-white bg-blue-700 hover:bg-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
+                    Submit
                 </button>
             </div>
         </form>
     </div>
-{% endblock %}
+{% endblock edit %}
