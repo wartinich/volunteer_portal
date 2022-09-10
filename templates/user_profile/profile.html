@@ -1,39 +1,26 @@
 {% extends 'user_profile/base.html' %}
 
-{% block form %}
-    <div style="width: 70%; height: max-content;" class="mt-6 ml-6 m-auto w-2/4 p-4 bg-white rounded-lg border border-gray-200 shadow-md">
-        <h3 class="mt-1 text-2xl uppercase font-medium text-gray-500">Personal information</h3>
-
-        <div class="mt-3">
-            <div class="mb-2 grid md:grid-cols-2 md:gap-6">
-                <div>
-                    <label class="block text-lg font-medium text-gray-900 dark:text-gray-300">First name</label>
-                    <span class="text-base">{{ user.first_name }}</span>
-                </div>
-                <div>
-                    <label for="last_name" class="block text-lg font-medium text-gray-900 dark:text-gray-300">Last
-                        name</label>
-                    <span class="text-base">{{ user.last_name }}</span>
-                </div>
-            </div>
-            <div class="mb-2">
-                <label for="email" class="block text-lg font-medium text-gray-900 dark:text-gray-300">Email</label>
-                <span class="text-base">{{ user.email }}</span>
-            </div>
-            <div class="mb-2">
-                <label for="date_of_birth" class="block text-lg font-medium text-gray-900 dark:text-gray-300">Date of
-                    birth</label>
-                <span class="text-base">{{ user.birth_date }}</span>
-            </div>
+{% block content %}
+    <div class="flex p-5">
+        <img class="w-36 h-36 rounded-full" src="https://flowbite.com/docs/images/people/profile-picture-5.jpg"
+             alt="Rounded avatar"/>
+        <div class="ml-6 mt-4">
+            <h3 class="text-xl font-medium items-center"
+                style="text-transform: capitalize">{{ user.first_name }} {{ user.last_name }}</h3>
         </div>
-
-        <div class="mt-2 flex justify-end">
-            <a href="{% url "user_profile:profile-update" %}">
-                <button type="button"
-                        class="text-white bg-blue-700 hover:bg-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2">
-                    Edit
-                </button>
-            </a>
+        <div class="ml-6 mt-4">
+            <a class="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2"
+               href="{% url 'user_profile:profile-update' %}">Edit Profile</a>
+            <a class="text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2"
+               href="{% url 'user:user-detail' user.id %}">Public View</a>
         </div>
+    </div>
+    <div class="text-sm font-medium text-center text-gray-500 border-b border-gray-200 dark:text-gray-400 dark:border-gray-700">
+        <ul class="flex flex-wrap -mb-px">
+            <li class="mr-2">
+                <a href="#"
+                   class="inline-block p-4 text-blue-600 rounded-t-lg border-b-2 border-blue-600 active dark:text-blue-500 dark:border-blue-500">Assistance</a>
+            </li>
+        </ul>
     </div>
 {% endblock %}

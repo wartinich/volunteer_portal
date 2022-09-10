@@ -1,13 +1,3 @@
 {% extends 'base.html' %}
 
 {% block title %}Profile{% endblock %}
-
-{% block content %}
-    <div style="width: 25%; height: max-content" class="mt-6 w-1/3 p-4 max-w-sm h-max bg-white rounded-lg border border-gray-200 shadow-md">
-        <img class="w-full h-max rounded-full" src="https://flowbite.com/docs/images/people/profile-picture-5.jpg" alt="Default avatar">
-        <div class="pt-4">
-            <h1 class="text-center font-normal font-sans">{{ user.full_name }}</h1>
-        </div>
-    </div>
-    {% block form %}{% endblock %}
-{% endblock %}
