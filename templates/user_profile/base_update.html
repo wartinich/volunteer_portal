@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="border-2 rounded-lg flex mt-6 ml-6">
+        <aside class="w-72" aria-label="Sidebar">
+            <div class="overflow-y-auto rounded-tl-lg rounded-bl-lg py-4 h-full px-3 bg-gray-100">
+                <ul class="space-y-2">
+                    <li>
+                        <a href="{% url 'user_profile:profile-update' %}"
+                           class="flex items-center p-2 text-base {% block active_edit_profile_item %}{% endblock active_edit_profile_item %} text-gray-900 rounded-lg dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700">
+                            <span class="flex-1 ml-3 whitespace-nowrap">Edit profile</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{% url 'user_profile:password-change' %}"
+                           class="flex items-center p-2 text-base {% block active_change_password_item %}{% endblock active_change_password_item %} text-gray-900 rounded-lg dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700">
+                            <span class="flex-1 ml-3 whitespace-nowrap">Change password</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="flex items-center p-2 text-base {% block active_logout_item %}{% endblock active_logout_item %} font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700" type="button" data-modal-toggle="logout-modal">
+                            <span class="flex-1 ml-3 whitespace-nowrap">Log Out</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </aside>
+        {% block edit %}{% endblock edit %}
+    </div>
+{% endblock content %}
