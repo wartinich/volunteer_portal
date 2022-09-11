@@ -57,7 +57,7 @@
                 </div>
                 <div class="mt-2">
                     <label for="bio" class="block text-base font-medium text-gray-900 dark:text-gray-400">Bio</label>
-                    <textarea id="bio" name="bio" rows="4"
+                    <textarea id="bio" name="bio" rows="4" style="resize: none;"
                               class="block p-2 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500">{% if user.bio is None %}{% else %}{{ user.bio }}{% endif %}</textarea>
                 </div>
             </div>
