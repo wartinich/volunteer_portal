@@ -9,6 +9,7 @@ class UserListView(LoginRequiredMixin, ListView):
     """Get list of user"""
 
     model = User
+    paginate_by = 3
     template_name = "user/user_list.html"
 
     def get_queryset(self):
