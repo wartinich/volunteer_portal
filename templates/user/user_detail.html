@@ -1,0 +1,66 @@
+{% extends 'user/base.html' %}
+
+{% block content %}
+    <div class="flex p-5">
+        <div>
+            <img class="w-36 h-36 rounded-full" src="https://flowbite.com/docs/images/people/profile-picture-5.jpg"
+                 alt="Rounded avatar"/>
+        </div>
+        <div>
+            <div class="flex items-center ml-6 mt-4">
+                <div class="ml-1 mr-8">
+                    <h3 class="text-xl font-medium"
+                        style="text-transform: capitalize;">{{ user.first_name }} {{ user.last_name }}</h3>
+                </div>
+                <div class="ml-6 mr-0">
+                    {% if is_following %}
+                        <form method="post" action="{% url 'follower:follower-delete' user.id %}">
+                            {% csrf_token %}
+                            <button class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-full text-sm px-4 py-2 text-center mr-2">
+                                Unfollow
+                            </button>
+                        </form>
+                    {% else %}
+                        <form method="post" action="{% url 'follower:follower-add' user.id %}">
+                            {% csrf_token %}
+                            <button class="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-4 py-2 text-center mr-2">
+                                Follow
+                            </button>
+                        </form>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="flex ml-6 mt-4 text-sm">
+                <div class="flex ml-1 mr-4">
+                    <p class="font-bold">{{ assistance_count }}</p>
+                    <p class="ml-1">assistance</p>
+                </div>
+                <div class="flex mr-4">
+                    <p class="font-bold">{{ follower_count }}</p>
+                    <p class="ml-1">followers</p>
+                </div>
+                <div class="flex">
+                    <p class="font-bold">{{ following_count }}</p>
+                    <p class="ml-1">following</p>
+                </div>
+            </div>
+            <div class="ml-6 mt-4">
+                <div style="width: 28rem;" class="ml-1">
+                    {% if user.bio is not None %}
+                        <p class="text-sm">{{ user.bio }}</p>
+                    {% else %}
+
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="text-sm font-medium text-center text-gray-500 border-b border-gray-200 dark:text-gray-400 dark:border-gray-700">
+        <ul class="flex flex-wrap -mb-px">
+            <li class="mr-2">
+                <a href="#"
+                   class="inline-block p-4 text-blue-600 rounded-t-lg border-b-2 border-blue-600 active dark:text-blue-500 dark:border-blue-500">Assistance</a>
+            </li>
+        </ul>
+    </div>
+{% endblock %}
