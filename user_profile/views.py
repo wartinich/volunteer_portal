@@ -24,7 +24,7 @@ class ProfileUpdateView(LoginRequiredMixin, UpdateView):
     """Update user data"""
 
     model = User
-    fields = ["email", "first_name", "last_name", "birth_date"]
+    fields = ["user_photo", "email", "first_name", "last_name", "birth_date", "bio"]
     template_name = "user_profile/profile_update_form.html"
     success_url = reverse_lazy("user_profile:profile-update")
 

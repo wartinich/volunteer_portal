@@ -1,4 +1,4 @@
-{% extends 'user_profile/base.html' %}
+{% extends 'user/base.html' %}
 
 {% block content %}
     <div class="flex p-5">
@@ -7,29 +7,40 @@
                  alt="Rounded avatar"/>
         </div>
         <div>
-            <div class="flex ml-6 mt-4">
+            <div class="flex items-center ml-6 mt-4">
                 <div class="ml-1 mr-8">
-                    <h3 class="text-xl font-medium items-center"
-                        style="text-transform: capitalize">{{ user.first_name }} {{ user.last_name }}</h3>
+                    <h3 class="text-xl font-medium"
+                        style="text-transform: capitalize;">{{ user.first_name }} {{ user.last_name }}</h3>
                 </div>
                 <div class="ml-6 mr-0">
-                    <a class="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-4 py-2 text-center mr-2"
-                       href="{% url 'user_profile:profile-update' %}">Edit Profile</a>
-                    <a class="text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-full text-sm px-4 py-2 text-center"
-                       href="{% url 'user:user-detail' user.id %}">Public View</a>
+                    {% if is_following %}
+                        <form method="post" action="{% url 'follower:follower-delete' user.id %}">
+                            {% csrf_token %}
+                            <button class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-full text-sm px-4 py-2 text-center mr-2">
+                                Unfollow
+                            </button>
+                        </form>
+                    {% else %}
+                        <form method="post" action="{% url 'follower:follower-add' user.id %}">
+                            {% csrf_token %}
+                            <button class="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-4 py-2 text-center mr-2">
+                                Follow
+                            </button>
+                        </form>
+                    {% endif %}
                 </div>
             </div>
             <div class="flex ml-6 mt-4 text-sm">
                 <div class="flex ml-1 mr-4">
-                    <p class="font-bold">121</p>
+                    <p class="font-bold">{{ assistance_count }}</p>
                     <p class="ml-1">assistance</p>
                 </div>
                 <div class="flex mr-4">
-                    <p class="font-bold">165</p>
+                    <p class="font-bold">{{ follower_count }}</p>
                     <p class="ml-1">followers</p>
                 </div>
                 <div class="flex">
-                    <p class="font-bold">81</p>
+                    <p class="font-bold">{{ following_count }}</p>
                     <p class="ml-1">following</p>
                 </div>
             </div>
