@@ -4,7 +4,9 @@ from django.contrib.auth.views import PasswordChangeView
 from django.urls import reverse_lazy
 from django.views.generic import TemplateView, UpdateView
 
+from assistance.models import Assistance
 from authentication.models import User
+from follower.models import Follower
 
 
 class ProfileView(LoginRequiredMixin, TemplateView):
@@ -14,9 +16,11 @@ class ProfileView(LoginRequiredMixin, TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-
         context["user"] = self.request.user
-
+        context["assistance"] = Assistance.objects.filter(user=self.request.user)
+        context["assistance_count"] = Assistance.objects.filter(user=self.request.user).count()
+        context["follower_count"] = Follower.objects.filter(user=self.request.user).count()
+        context["following_count"] = Follower.objects.filter(subscriber=self.request.user).count()
         return context
 
 
