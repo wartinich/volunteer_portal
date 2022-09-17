@@ -7,6 +7,7 @@ from django.views.generic import TemplateView, UpdateView
 from assistance.models import Assistance
 from authentication.models import User
 from follower.models import Follower
+from user_profile.forms import UserForm
 
 
 class ProfileView(LoginRequiredMixin, TemplateView):
@@ -28,9 +29,9 @@ class ProfileUpdateView(LoginRequiredMixin, UpdateView):
     """Update user data"""
 
     model = User
-    fields = ["user_photo", "email", "first_name", "last_name", "birth_date", "bio"]
+    form_class = UserForm
     template_name = "user_profile/profile_update_form.html"
-    success_url = reverse_lazy("user_profile:profile-update")
+    success_url = reverse_lazy("user_profile:profile")
 
     def get_object(self, queryset=None):
         return self.request.user

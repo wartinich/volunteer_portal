@@ -5,14 +5,23 @@
 {% block edit %}
     <div style="width: 80%;"
          class="w-max m-auto w-2/4 rounded-r-lg p-4 bg-white">
-        <form method="post" enctype="multipart/form-data">
+        <form method="post">
             {% csrf_token %}
             <div>
                 <div>
-                    <img id="avatar" class="w-10 h-10 rounded-full" src="https://flowbite.com/docs/images/people/profile-picture-5.jpg"
-                     alt="user photo">
+                    {% if user.user_photo %}
+                        <img id="avatar" class="w-10 h-10 rounded-full"
+                             src="{{ user.user_photo.url }}"
+                             alt="user photo">
+                    {% else %}
+                        <img id="avatar" class="w-10 h-10 rounded-full"
+                         src="https://flowbite.com/docs/images/people/profile-picture-5.jpg"
+                         alt="user photo">
+                    {% endif %}
                     <label class="text-sm font-medium text-blue-600" for="photo">Change profile photo</label>
-                    <input type="file" accept=".png, .jpeg, .jpg" name="user_photo" id="photo" style="display: none" onchange="document.getElementById('avatar').src = window.URL.createObjectURL(this.files[0])">
+                    <input type="file" value="{{ user.user_photo }}" accept=".png, .jpeg, .jpg" name="user_photo"
+                           id="photo" style="display: none"
+                           onchange="document.getElementById('avatar').src = window.URL.createObjectURL(this.files[0])">
                 </div>
                 <div class="mt-2 grid md:grid-cols-2 md:gap-6">
                     <div>
