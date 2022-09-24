@@ -6,6 +6,9 @@ The file contains important changes from version to version.
 
 ### Features
 
+* `Assistance`
+  * Add the ability to create, read, update and delete assistance
+
 * `Follower`
   * Add the ability to add, remove follower
 
@@ -17,6 +20,7 @@ The file contains important changes from version to version.
   * Add custom user model
   * Add the ability to signup, login, logout
   * Add the ability to reset password
+  * Add the ability to social auth
 
 * `Initialize project`
   * Setup project and configure the structure
