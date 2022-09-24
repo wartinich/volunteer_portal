@@ -3,31 +3,65 @@
 {% block title %}Login{% endblock %}
 
 {% block form %}
-    <div class="relative top-0 bottom-0 left-0 right-0 m-auto p-4 w-full max-w-sm bg-white rounded-lg border border-gray-200 shadow-md sm:p-6 md:p-8 dark:bg-gray-800 dark:border-gray-700">
+    <div class="relative top-0 bottom-0 left-0 right-0 m-auto p-4 w-full max-w-sm bg-white rounded-lg border border-gray-200 shadow-md sm:p-6 md:p-8">
         <form class="space-y-6" method="post">
-        {% csrf_token %}
-        <h5 class="text-xl text-center font-bold text-gray-900 dark:text-white">Login</h5>
-        <div>
-            <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Your email</label>
-            <input type="email" name="username" id="email" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="name@company.com" value="{{ form.data.email }}">
-        </div>
-        <div>
-            <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Your password</label>
-            <input type="password" name="password" id="password" placeholder="••••••••" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" value="{{ form.data.password }}">
-        </div>
-        <div class="flex items-start">
-            <div class="flex items-start">
-                <div class="flex items-center h-5">
-                    <input id="remember" type="checkbox" value="" class="w-4 h-4 bg-gray-50 rounded border border-gray-300 focus:ring-3 focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-blue-600 dark:ring-offset-gray-800" required="">
-                </div>
-                <label for="remember" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Remember me</label>
+            {% csrf_token %}
+            <h5 class="text-xl text-center font-bold text-gray-900 dark:text-white">Login</h5>
+            <div>
+                <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Your
+                    email</label>
+                <input type="email" name="username" id="email"
+                       class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                       placeholder="name@company.com" value="{{ form.data.email }}">
             </div>
-            <a href="{% url 'authentication:password-reset' %}" class="ml-auto text-sm text-blue-700 hover:underline dark:text-blue-500">Forgot Password?</a>
-        </div>
-        <button type="submit" class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Login to your account</button>
-        <div class="text-sm font-medium text-gray-500 dark:text-gray-300">
-            Not registered? <a href="{% url 'authentication:sign_up' %}" class="text-blue-700 hover:underline dark:text-blue-500">Create account</a>
-        </div>
-    </form>
+            <div>
+                <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Your
+                    password</label>
+                <input type="password" name="password" id="password" placeholder="••••••••"
+                       class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                       value="{{ form.data.password }}">
+            </div>
+            <div class="flex items-start">
+                <div class="flex items-start">
+                    <div class="flex items-center h-5">
+                        <input id="remember" type="checkbox" value=""
+                               class="w-4 h-4 bg-gray-50 rounded border border-gray-300 focus:ring-3 focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-blue-600 dark:ring-offset-gray-800"
+                               required="">
+                    </div>
+                    <label for="remember" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Remember
+                        me</label>
+                </div>
+                <a href="{% url 'authentication:password-reset' %}"
+                   class="ml-auto text-sm text-blue-700 hover:underline dark:text-blue-500">Forgot Password?</a>
+            </div>
+            <button type="submit"
+                    class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                Login to your account
+            </button>
+            <div class="text-sm font-medium text-gray-500 dark:text-gray-300">
+                Not registered? <a href="{% url 'authentication:sign_up' %}"
+                                   class="text-blue-700 hover:underline dark:text-blue-500">Create account</a>
+            </div>
+
+            <div class="block">
+                <p class="text-center font-medium mx-4 mb-0">OR</p>
+            </div>
+            <div class="flex justify-between">
+
+                <a class="px-6 py-2 text-white font-medium text-sm bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg transition duration-150 ease-in-out min-w-max flex justify-center w-1/2 items-center mr-2"
+                   href="#!">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="rgb(107 114 128)"
+                         class="bi bi-facebook" viewBox="0 0 16 16">
+                        <path d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951z"/>
+                    </svg>
+                </a>
+                <a class="px-6 py-2 text-white font-medium text-sm bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg transition duration-150 ease-in-out min-w-max flex justify-center w-1/2 items-center" href="#!">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="rgb(107 114 128)"
+                         class="bi bi-google" viewBox="0 0 16 16">
+                        <path d="M15.545 6.558a9.42 9.42 0 0 1 .139 1.626c0 2.434-.87 4.492-2.384 5.885h.002C11.978 15.292 10.158 16 8 16A8 8 0 1 1 8 0a7.689 7.689 0 0 1 5.352 2.082l-2.284 2.284A4.347 4.347 0 0 0 8 3.166c-2.087 0-3.86 1.408-4.492 3.304a4.792 4.792 0 0 0 0 3.063h.003c.635 1.893 2.405 3.301 4.492 3.301 1.078 0 2.004-.276 2.722-.764h-.003a3.702 3.702 0 0 0 1.599-2.431H8v-3.08h7.545z"/>
+                    </svg>
+                </a>
+            </div>
+        </form>
     </div>
 {% endblock %}

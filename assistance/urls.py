@@ -8,5 +8,6 @@ urlpatterns = [
     path("", views.AssistanceListView.as_view(), name="assistance-list"),
     path("create/", views.AssistanceCreateView.as_view(), name="assistance-create"),
     path("detail/<int:pk>/", views.AssistanceDetailView.as_view(), name="assistance-detail"),
+    path("update/<int:pk>/", views.AssistanceUpdateView.as_view(), name="assistance-update"),
     path("delete/<int:pk>/", views.AssistanceDeleteView.as_view(), name="assistance-delete")
 ]

@@ -14,12 +14,25 @@ class Category(models.Model):
         verbose_name_plural = "category"
         ordering = ("-id",)
 
-    def str(self):
+    def __str__(self):
         return self.name
 
 
 class Assistance(models.Model):
     name = models.CharField(verbose_name="name", max_length=200)
+    description = models.TextField(
+        verbose_name="description",
+        max_length=2000
+    )
+    image = models.FileField(
+        verbose_name="image",
+        upload_to="assistance/",
+        null=True
+    )
+    payment_url = models.CharField(
+        verbose_name="payment url",
+        max_length=250
+    )
     category = models.ForeignKey(
         Category,
         verbose_name="category",
@@ -36,7 +49,8 @@ class Assistance(models.Model):
     status = models.CharField(
         verbose_name="status",
         max_length=150,
-        choices=[(v.name, v.value) for v in AssistanceStatus]
+        choices=[(v.name, v.value) for v in AssistanceStatus],
+        default=AssistanceStatus.ASSISTANCE_IPS.value
     )
     created_at = models.DateTimeField(
         verbose_name="created",
@@ -55,20 +69,6 @@ class Assistance(models.Model):
 
     def str(self):
         return self.name
-
-
-class AssistanceImage(models.Model):
-    assistance = models.ForeignKey(
-        Assistance,
-        verbose_name="assistance",
-        on_delete=models.CASCADE,
-        related_name="assistance_images"
-    )
-    image = models.ImageField(verbose_name="image", upload_to="assistance/")
-
-    class Meta:
-        db_table = "assistance_images"
-        ordering = ("-id",)
 
 
 class AssistanceComment(MPTTModel):

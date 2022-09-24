@@ -1,0 +1,87 @@
+{% extends 'assistance/base.html' %}
+
+{% block content %}
+    <div class="pt-4 flex justify-center">
+        <form method="post" class="p-6 bg-white rounded-lg border border-gray-200 shadow-md w-1/2">
+            <h1 class="font-medium text-xl mb-3 text-gray-500">Edit assistance</h1>
+            {% csrf_token %}
+            <div class="mb-3">
+                <span class="block text-sm font-medium text-gray-900 dark:text-gray-300">Image</span>
+                {% if assistance.image %}
+                    <img class="w-full h-auto rounded-lg" id="image" src="{{ assistance.image }}"
+                     alt="image">
+                {% else %}
+                    <img class="w-full h-auto rounded-lg" id="image" src="https://flowbite.com/docs/images/examples/image-1@2x.jpg"
+                     alt="image">
+                {% endif %}
+                <input type="file" value="{{ assistance.image }}" accept=".png, .jpeg, .jpg" name="user_photo"
+                       id="photo" style="display: none"
+                       onchange="document.getElementById('image').src = window.URL.createObjectURL(this.files[0])">
+                <label class="text-sm font-medium text-blue-600" for="photo">Change assistance image</label>
+            </div>
+            <div class="mb-3">
+                <label for="name" class="block text-sm font-medium text-gray-900 dark:text-gray-300">Title</label>
+                <input name="name" type="text" id="name" value="{{ assistance.name }}"
+                       class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2"
+                       placeholder="Title">
+            </div>
+            <div class="mb-3">
+                <label for="description"
+                       class="block text-sm font-medium text-gray-900">Description</label>
+                <textarea name="description" id="description" rows="4"
+                          class="block p-2 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 text-white"
+                          placeholder="Assistance description....">{{ assistance.description }}</textarea>
+            </div>
+            <div class="mb-3">
+                <label for="payment_url" class="block text-sm font-medium text-gray-900 dark:text-gray-300">Payment
+                    URL</label>
+                <input type="text" name="payment_url" id="payment_url" value="{{ assistance.payment_url }}"
+                       class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2"
+                       placeholder="flowbite.com">
+            </div>
+            <div class="grid gap-6 mb-5 md:grid-cols-2">
+                <div>
+                    <label for="category" class="block text-sm font-medium text-gray-900 dark:text-gray-400">Select
+                        a category</label>
+                    <select name="category" id="category"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2">
+                        {% if assistance.category %}
+                            {% for item in form.category.field.queryset %}
+                                {% if item == assistance.category %}
+                                    <option value="{{ item.id }}" selected>{{ item.name }}</option>
+                                {% else %}
+                                    <option value="{{ item.id }}">{{ item.name }}</option>
+                                {% endif %}
+                            {% endfor %}
+                        {% else %}
+                            <option selected>Choose a category</option>
+                            {% for v in form.category.field.queryset %}
+                                <option value="{{ v.id }}">{{ v.name }}</option>
+                            {% endfor %}
+                        {% endif %}
+                    </select>
+                </div>
+                <div>
+                    <label for="status" class="block text-sm font-medium text-gray-900 dark:text-gray-400">Select a
+                        status</label>
+                    <select name="status" id="status"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2">
+                        {% for v in form.fields.status.choices %}
+                            {% if v.0 == '' %}
+                                <option disabled selected value="">Select a status</option>
+                            {% elif v.0 == assistance.status %}
+                                <option selected value="{{ v.0 }}">{{ v.1 }}</option>
+                            {% else %}
+                                <option value="{{ v.0 }}">{{ v.1 }}</option>
+                            {% endif %}
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+            <button type="submit"
+                    class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-4 py-2 text-center">
+                Submit
+            </button>
+        </form>
+    </div>
+{% endblock %}
