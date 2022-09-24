@@ -6,6 +6,10 @@ The file contains important changes from version to version.
 
 ### Features
 
+* `API`
+  * Create an API
+  * Add the ability to use an API with swagger 
+
 * `Assistance`
   * Add the ability to create, read, update and delete assistance
 
