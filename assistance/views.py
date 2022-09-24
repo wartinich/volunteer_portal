@@ -1,9 +1,8 @@
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404
 from django.urls import reverse_lazy
-from django.views.generic import ListView, DetailView, CreateView, DeleteView
+from django.views.generic import ListView, DetailView, CreateView, DeleteView, UpdateView
 
 from assistance.forms import AssistanceForm
 from assistance.models import Assistance
@@ -27,6 +26,7 @@ class AssistanceListView(LoginRequiredMixin, ListView):
 
     model = Assistance
     template_name = "assistance/assistance_list.html"
+    paginate_by = 6
 
     def get_queryset(self):
         queryset = self.model.objects.all()
@@ -44,6 +44,21 @@ class AssistanceDetailView(LoginRequiredMixin, DetailView):
         return get_object_or_404(self.model, pk=self.kwargs["pk"])
 
 
+class AssistanceUpdateView(LoginRequiredMixin, UpdateView):
+    """Update assistance data"""
+
+    model = Assistance
+    form_class = AssistanceForm
+    template_name = "assistance/assistance_update_form.html"
+    context_object_name = "assistance"
+
+    def get_success_url(self):
+        return reverse_lazy("assistance:assistance-detail", kwargs={"pk": self.kwargs["pk"]})
+
+    def get_object(self, queryset=None):
+        return get_object_or_404(self.model, pk=self.kwargs["pk"])
+
+
 class AssistanceDeleteView(LoginRequiredMixin, DeleteView):
     """Delete assistance"""
 
@@ -52,9 +67,3 @@ class AssistanceDeleteView(LoginRequiredMixin, DeleteView):
 
     def get_object(self, queryset=None):
         return get_object_or_404(self.model, pk=self.kwargs["pk"])
-
-    def delete(self, request, *args, **kwargs):
-        response = super().delete(request, *args, **kwargs)
-        message = "Assistance has been deleted"
-        messages.success(request=self.request, message=message)
-        return response

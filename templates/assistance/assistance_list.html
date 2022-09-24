@@ -1,1 +1,153 @@
 {% extends 'assistance/base.html' %}
+
+
+{% block content %}
+    <div class="flex justify-between items-center pb-4 pt-4">
+        <div>
+            <button id="dropdownRadioButton" data-dropdown-toggle="dropdownRadio"
+                    class="inline-flex items-center text-gray-500 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-3 py-1.5 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700"
+                    type="button">
+                <svg class="mr-2 w-4 h-4 text-gray-400" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20"
+                     xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd"
+                          d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z"
+                          clip-rule="evenodd"></path>
+                </svg>
+                Last 30 days
+                <svg class="ml-2 w-3 h-3" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                     xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                </svg>
+            </button>
+            <!-- Dropdown menu -->
+            <div id="dropdownRadio"
+                 class="hidden z-10 w-48 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600"
+                 data-popper-reference-hidden="" data-popper-escaped="" data-popper-placement="top"
+                 style="position: absolute; inset: auto auto 0px 0px; margin: 0px; transform: translate3d(522.5px, 3847.5px, 0px);">
+                <ul class="p-3 space-y-1 text-sm text-gray-700 dark:text-gray-200"
+                    aria-labelledby="dropdownRadioButton">
+                    <li>
+                        <div class="flex items-center p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-600">
+                            <input id="filter-radio-example-1" type="radio" value="" name="filter-radio"
+                                   class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                            <label for="filter-radio-example-1"
+                                   class="ml-2 w-full text-sm font-medium text-gray-900 rounded dark:text-gray-300">Last
+                                day</label>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="flex items-center p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-600">
+                            <input checked="" id="filter-radio-example-2" type="radio" value="" name="filter-radio"
+                                   class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                            <label for="filter-radio-example-2"
+                                   class="ml-2 w-full text-sm font-medium text-gray-900 rounded dark:text-gray-300">Last
+                                7 days</label>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="flex items-center p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-600">
+                            <input id="filter-radio-example-3" type="radio" value="" name="filter-radio"
+                                   class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                            <label for="filter-radio-example-3"
+                                   class="ml-2 w-full text-sm font-medium text-gray-900 rounded dark:text-gray-300">Last
+                                30 days</label>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="flex items-center p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-600">
+                            <input id="filter-radio-example-4" type="radio" value="" name="filter-radio"
+                                   class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                            <label for="filter-radio-example-4"
+                                   class="ml-2 w-full text-sm font-medium text-gray-900 rounded dark:text-gray-300">Last
+                                month</label>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="flex items-center p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-600">
+                            <input id="filter-radio-example-5" type="radio" value="" name="filter-radio"
+                                   class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                            <label for="filter-radio-example-5"
+                                   class="ml-2 w-full text-sm font-medium text-gray-900 rounded dark:text-gray-300">Last
+                                year</label>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <label for="table-search" class="sr-only">Search</label>
+        <div class="relative">
+            <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
+                <svg class="w-5 h-5 text-gray-500 dark:text-gray-400" aria-hidden="true" fill="currentColor"
+                     viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd"
+                          d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
+                          clip-rule="evenodd"></path>
+                </svg>
+            </div>
+            <input type="text" id="table-search"
+                   class="block p-2 pl-10 w-80 text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                   placeholder="Search for items">
+        </div>
+    </div>
+    <div class="grid grid-cols-2 gap-4 pb-2">
+        {% for item in object_list %}
+            <div class="w-full bg-white rounded-lg border border-gray-200 shadow-md">
+                <div class="flex justify-end px-4 pt-3 pb-2 relative">
+                    <button id="dropdownButton" data-dropdown-toggle="dropdown"
+                            class="inline-block text-gray-500 dark:text-gray-400 hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-1.5"
+                            type="button">
+                        <span class="sr-only">Open dropdown</span>
+                        <svg class="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20"
+                             xmlns="http://www.w3.org/2000/svg">
+                            <path d="M6 10a2 2 0 11-4 0 2 2 0 014 0zM12 10a2 2 0 11-4 0 2 2 0 014 0zM16 12a2 2 0 100-4 2 2 0 000 4z"></path>
+                        </svg>
+                    </button>
+                    <!-- Dropdown menu -->
+                    <div id="dropdown"
+                         class="hidden z-10 w-44 text-base list-none bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700">
+                        <ul class="py-1" aria-labelledby="dropdownButton">
+                            {% if item.user == request.user %}
+                                <li>
+                                    <a href="{% url 'assistance:assistance-update' item.id %}"
+                                       class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Edit</a>
+                                </li>
+                                <li>
+                                    <a href="{% url 'assistance:assistance-delete' item.id %}"
+                                       class="block py-2 px-4 text-sm text-red-600 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Delete</a>
+                                </li>
+                            {% else %}
+                                <li>
+                                    <a href="#"
+                                       class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Report</a>
+                                </li>
+                            {% endif %}
+                        </ul>
+                    </div>
+                </div>
+                <div class="w-f bg-white rounded-lg">
+                    <a href="#">
+                        <img class="px-5" src="https://flowbite.com/docs/images/blog/image-1.jpg" alt=""/>
+                    </a>
+                    <div class="p-5">
+                        <a href="#">
+                            <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Noteworthy
+                                technology acquisitions 2021</h5>
+                        </a>
+                        <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Here are the biggest enterprise
+                            technology
+                            acquisitions of 2021 so far, in reverse chronological order.</p>
+                        <a href="{{ item.payment_url }}" target="_blank"
+                           class="inline-flex items-center focus:outline-none text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900">
+                            Donate
+                        </a>
+                        <a href="{% url 'assistance:assistance-detail' item.id %}"
+                           class="inline-flex items-center text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
+                            Detail
+                        </a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+    {% include 'paginator.html' %}
+{% endblock %}
