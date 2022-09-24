@@ -11,7 +11,9 @@ urlpatterns = [
     path("follower/", include("follower.urls")),
     path("user/", include("user.urls")),
     path("assitance/", include("assistance.urls")),
-    path("petition/", include("petition.urls"))
+    path("petition/", include("petition.urls")),
+
+    path("auth/", include('social_django.urls'), name="social"),
 ]
 
 if settings.DEBUG:

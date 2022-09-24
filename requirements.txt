@@ -4,6 +4,7 @@ Pillow
 djangorestframework
 django-filter
 django-rest-swagger
+social-auth-app-django
 psycopg2-binary
 python-dotenv
 flake8
