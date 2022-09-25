@@ -1,0 +1,13 @@
+version: '3.8'
+
+services:
+  nginx:
+    build:
+      context: ./.conf/nginx
+    .volumes:
+      - ./assets:/app/assets
+      - ./media:/app/media
+    ports:
+      - 80:8000
+    networks:
+      - union-network
