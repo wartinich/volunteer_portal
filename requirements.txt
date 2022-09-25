@@ -10,3 +10,5 @@ python-dotenv
 flake8
 pytest-django
 mixer
+locust
+celery
