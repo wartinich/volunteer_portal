@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     'social_django',
     'rest_framework',
     'rest_framework_swagger',
+    'graphene_django',
     'django_filters',
 
     'authentication',
@@ -150,4 +151,8 @@ SOCIAL_AUTH_URL_NAMESPACE = 'social'
 
 REST_FRAMEWORK = {
     'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema'
+}
+
+GRAPHENE = {
+    'SCHEMA': 'api.schemas.schema'
 }
