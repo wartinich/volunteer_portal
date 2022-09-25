@@ -1,0 +1,8 @@
+{% autoescape off %}
+Verify user
+
+{{ protocol }}://{{ domain }}{% url 'user_profile:verify' uidb64=uid token=token %}
+
+If clicking the link above doesn't work, please copy and paste the URL in a new browser
+window instead.
+{% endautoescape %}
