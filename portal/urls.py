@@ -1,8 +1,10 @@
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include
+from graphene_django.views import GraphQLView
 from rest_framework_swagger.views import get_swagger_view
 
+from api.schemas import schema
 from portal import settings
 
 schema_view = get_swagger_view(title='Volunteer portal API')
@@ -20,6 +22,8 @@ urlpatterns = [
 
     path("api/", include("api.urls")),
     path("swagger/", schema_view),
+
+    path("graphql/", GraphQLView.as_view(graphiql=True, schema=schema)),
 ]
 
 if settings.DEBUG:
