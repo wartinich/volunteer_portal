@@ -3,6 +3,7 @@ from django.shortcuts import get_object_or_404
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView, DeleteView, UpdateView
 
+from assistance.filters import AssistanceFilter
 from assistance.forms import AssistanceForm
 from assistance.models import Assistance
 
@@ -29,7 +30,13 @@ class AssistanceListView(LoginRequiredMixin, ListView):
 
     def get_queryset(self):
         queryset = self.model.objects.all()
-        return queryset
+        f = AssistanceFilter(self.request.GET, queryset)
+        return f.qs
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["filter"] = AssistanceFilter(self.request.GET, self.model.objects.all())
+        return context
 
 
 class AssistanceDetailView(LoginRequiredMixin, DetailView):
