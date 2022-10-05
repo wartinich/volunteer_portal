@@ -5,6 +5,7 @@ from django.views.generic import ListView, DetailView
 from assistance.models import Assistance
 from authentication.models import User
 from follower.models import Follower
+from user.filters import UserFilter
 
 
 class UserListView(LoginRequiredMixin, ListView):
@@ -16,7 +17,8 @@ class UserListView(LoginRequiredMixin, ListView):
 
     def get_queryset(self):
         queryset = self.model.objects.all()
-        return queryset
+        f = UserFilter(self.request.GET, queryset)
+        return f.qs
 
 
 class UserDetailView(LoginRequiredMixin, DetailView):
