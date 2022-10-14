@@ -1,13 +1,53 @@
-version: '3.8'
+version: "3.0"
 
 services:
+  app:
+    build:
+      context: ./
+    env_file:
+      - .env
+    command: bash /app/entrypoint.sh
+    volumes:
+      - ./:app
+    restart: always
+    depends_on:
+      - db
+    networks:
+      - union-network
+
+  db:
+    image: postgres:14-alpine
+    restart: always
+    env_file:
+      - .env
+    ports:
+      - 5433:5432
+    networks:
+      - union-network
+
+  redis:
+    image: redis
+    restart: always
+    ports:
+      - 6379:6379
+    networks:
+      - union-network
+
   nginx:
     build:
       context: ./.conf/nginx
-    .volumes:
+    volumes:
       - ./assets:/app/assets
       - ./media:/app/media
     ports:
       - 80:8000
     networks:
       - union-network
+
+volumes:
+  assets:
+  media:
+
+networks:
+  union-network:
+    external: true
