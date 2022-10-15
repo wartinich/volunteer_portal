@@ -1,131 +1,129 @@
 {% extends 'user/base.html' %}
 
 {% block content %}
-    <div class="flex p-5">
-        <div>
-            <img class="w-36 h-36 rounded-full" src="https://flowbite.com/docs/images/people/profile-picture-5.jpg"
-                 alt="Rounded avatar"/>
-        </div>
-        <div>
-            <div class="flex items-center ml-6 mt-4">
-                <div class="ml-1 mr-8">
-                    <h3 class="text-xl font-medium"
-                        style="text-transform: capitalize;">{{ user.first_name }} {{ user.last_name }}</h3>
-                </div>
-                <div class="ml-6 mr-0">
-                    {% if is_following %}
-                        <form method="post" action="{% url 'follower:follower-delete' user.id %}">
-                            {% csrf_token %}
-                            <button class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-full text-sm px-4 py-2 text-center mr-2">
-                                Unfollow
-                            </button>
-                        </form>
-                    {% else %}
-                        <form method="post" action="{% url 'follower:follower-add' user.id %}">
-                            {% csrf_token %}
-                            <button class="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-4 py-2 text-center mr-2">
-                                Follow
-                            </button>
-                        </form>
-                    {% endif %}
-                </div>
-            </div>
-            <div class="flex ml-6 mt-4 text-sm">
-                <div class="flex ml-1 mr-4">
-                    <p class="font-bold">{{ assistance_count }}</p>
-                    <p class="ml-1">assistance</p>
-                </div>
-                <div class="flex mr-4">
-                    <p class="font-bold">{{ follower_count }}</p>
-                    <p class="ml-1">followers</p>
-                </div>
-                <div class="flex">
-                    <p class="font-bold">{{ following_count }}</p>
-                    <p class="ml-1">following</p>
-                </div>
-            </div>
-            <div class="ml-6 mt-4">
-                <div style="width: 28rem;" class="ml-1">
-                    {% if user.bio is not None %}
-                        <p class="text-sm">{{ user.bio }}</p>
-                    {% else %}
-
-                    {% endif %}
-                </div>
-            </div>
-        </div>
+<div class="flex p-5">
+    <div>
+        <img class="w-36 h-36 rounded-full" src="https://flowbite.com/docs/images/people/profile-picture-5.jpg"
+            alt="Rounded avatar" />
     </div>
-    <div class="text-sm font-medium text-center text-gray-500 border-b border-gray-200 dark:text-gray-400 dark:border-gray-700">
-        <ul class="flex justify-between">
-            <li class="mr-2">
-                <a class="inline-block p-3 text-blue-600 rounded-t-lg border-b-2 border-blue-600 active dark:text-blue-500 dark:border-blue-500">Assistance</a>
-            </li>
-            {% if user == request.user %}
-            <li class="mr-2">
-                <a href="{% url 'assistance:assistance-create' %}"
-                   class="inline-block text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:text-blue-500 dark:border-blue-500">Add Assistance</a>
-            </li>
-            {% endif %}
-        </ul>
-    </div>
-    <div class="mt-2 grid grid-cols-2 gap-2 pb-2">
-        {% for item in assistance %}
-            <div class="w-full bg-white rounded-lg border border-gray-200 shadow-md">
-                <div class="flex justify-end px-4 pt-3 pb-2 relative">
-                    <button id="dropdownButton" data-dropdown-toggle="dropdown"
-                            class="inline-block text-gray-500 dark:text-gray-400 hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-1.5"
-                            type="button">
-                        <span class="sr-only">Open dropdown</span>
-                        <svg class="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20"
-                             xmlns="http://www.w3.org/2000/svg">
-                            <path d="M6 10a2 2 0 11-4 0 2 2 0 014 0zM12 10a2 2 0 11-4 0 2 2 0 014 0zM16 12a2 2 0 100-4 2 2 0 000 4z"></path>
-                        </svg>
+    <div>
+        <div class="flex items-center ml-6 mt-4">
+            <div class="ml-1 mr-8">
+                <h3 class="text-xl font-medium" style="text-transform: capitalize;">{{ user.first_name }} {{ user.last_name }}</h3>
+            </div>
+            <div class="ml-6 mr-0">
+                {% if is_following %}
+                <form method="post" action="{% url 'follower:follower-delete' user.id %}">
+                    {% csrf_token %}
+                    <button
+                        class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-full text-sm px-4 py-2 text-center mr-2">
+                        Unfollow
                     </button>
-                    <!-- Dropdown menu -->
-                    <div id="dropdown"
-                         class="hidden z-10 w-44 text-base list-none bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700">
-                        <ul class="py-1" aria-labelledby="dropdownButton">
-                            {% if item.user == request.user %}
-                                <li>
-                                    <a href="{% url 'assistance:assistance-update' item.id %}"
-                                       class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Edit</a>
-                                </li>
-                                <li>
-                                    <a href="{% url 'assistance:assistance-delete' item.id %}"
-                                       class="block py-2 px-4 text-sm text-red-600 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Delete</a>
-                                </li>
-                            {% else %}
-                                <li>
-                                    <a href="#"
-                                       class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Report</a>
-                                </li>
-                            {% endif %}
-                        </ul>
-                    </div>
-                </div>
-                <div class="w-f bg-white rounded-lg">
-                    <a href="#">
-                        <img class="px-5" src="https://flowbite.com/docs/images/blog/image-1.jpg" alt=""/>
-                    </a>
-                    <div class="p-5">
-                        <a href="#">
-                            <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Noteworthy
-                                technology acquisitions 2021</h5>
-                        </a>
-                        <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Here are the biggest enterprise
-                            technology
-                            acquisitions of 2021 so far, in reverse chronological order.</p>
-                        <a href="{{ item.payment_url }}" target="_blank"
-                           class="inline-flex items-center focus:outline-none text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900">
-                            Donate
-                        </a>
-                        <a href="{% url 'assistance:assistance-detail' item.id %}"
-                           class="inline-flex items-center text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
-                            Detail
-                        </a>
-                    </div>
-                </div>
+                </form>
+                {% else %}
+                <form method="post" action="{% url 'follower:follower-add' user.id %}">
+                    {% csrf_token %}
+                    <button
+                        class="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-4 py-2 text-center mr-2">
+                        Follow
+                    </button>
+                </form>
+                {% endif %}
             </div>
-        {% endfor %}
+        </div>
+        <div class="flex ml-6 mt-4 text-sm">
+            <div class="flex ml-1 mr-4">
+                <p class="font-bold">{{ assistance_count }}</p>
+                <p class="ml-1">assistance</p>
+            </div>
+            <div class="flex mr-4">
+                <p class="font-bold">{{ follower_count }}</p>
+                <p class="ml-1">followers</p>
+            </div>
+            <div class="flex">
+                <p class="font-bold">{{ following_count }}</p>
+                <p class="ml-1">following</p>
+            </div>
+        </div>
+        <div class="ml-6 mt-4">
+            <div style="width: 28rem;" class="ml-1">
+                <p class="text-sm">{{ user.bio|default:"" }}</p>
+            </div>
+        </div>
     </div>
+</div>
+<div class="text-sm font-medium text-center text-gray-500 border-b border-gray-200">
+    <ul class="flex justify-between">
+        <li class="mr-2">
+            <a class="inline-block p-3 text-blue-600 rounded-t-lg border-b-2 border-blue-600 active">Assistance</a>
+        </li>
+        {% if user == request.user %}
+        <li class="mr-2 flex items-center">
+            <a href="{% url 'assistance:assistance-create' %}" class="inline-block text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-1.5 text-center">
+                Add Assistance
+            </a>
+        </li>
+        {% endif %}
+    </ul>
+</div>
+<div class="mt-2 grid grid-cols-2 gap-2 pb-2">
+    {% for item in assistance %}
+    <div class="w-full bg-white rounded-lg border border-gray-200 shadow-md">
+        <div class="flex justify-end px-4 pt-3 pb-2 relative">
+            <button id="dropdownButton" data-dropdown-toggle="dropdown"
+                class="inline-block text-gray-500 dark:text-gray-400 hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg text-sm p-1.5"
+                type="button">
+                <span class="sr-only">Open dropdown</span>
+                <svg class="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M6 10a2 2 0 11-4 0 2 2 0 014 0zM12 10a2 2 0 11-4 0 2 2 0 014 0zM16 12a2 2 0 100-4 2 2 0 000 4z">
+                    </path>
+                </svg>
+            </button>
+            <!-- Dropdown menu -->
+            <div id="dropdown"
+                class="hidden z-10 w-44 text-base list-none bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700">
+                <ul class="py-1" aria-labelledby="dropdownButton">
+                    {% if item.user == request.user %}
+                    <li>
+                        <a href="{% url 'assistance:assistance-update' item.id %}"
+                            class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100">Edit</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'assistance:assistance-delete' item.id %}"
+                            class="block py-2 px-4 text-sm text-red-600 hover:bg-gray-100">Delete</a>
+                    </li>
+                    {% else %}
+                    <li>
+                        <a href="#"
+                            class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100">Report</a>
+                    </li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+        <div class="w-f bg-white rounded-lg">
+            <a href="{% url 'assistance:assistance-detail' item.id %}">
+                <img class="px-5" src="https://flowbite.com/docs/images/blog/image-1.jpg" alt="" />
+            </a>
+            <div class="p-5">
+                <a>
+                    <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{{ item.name }}</h5>
+                </a>
+                <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">
+                    {{ item.description|truncatechars_html:110 }}
+                </p>
+                <a href="{{ item.payment_url }}" target="_blank"
+                    class="inline-flex items-center focus:outline-none text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2">
+                    Donate
+                </a>
+                <a href="{% url 'assistance:assistance-detail' item.id %}" class="inline-flex items-center text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 focus:outline-none">
+                    Detail
+                </a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
 {% endblock %}

@@ -39,9 +39,9 @@
                         <div class="flex items-center p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-600">
                             <input checked="" id="filter-radio-example-2" type="radio" value="" name="filter-radio"
                                    class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                            <label for="filter-radio-example-2"
-                                   class="ml-2 w-full text-sm font-medium text-gray-900 rounded dark:text-gray-300">Last
-                                7 days</label>
+                            <label for="filter-radio-example-2" class="ml-2 w-full text-sm font-medium text-gray-900 rounded dark:text-gray-300">
+                                Last 7 days
+                            </label>
                         </div>
                     </li>
                     <li>
@@ -127,23 +127,22 @@
                     </div>
                 </div>
                 <div class="w-f bg-white rounded-lg">
-                    <a href="#">
+                    <a href="{% url 'assistance:assistance-detail' item.id %}">
                         <img class="px-5" src="https://flowbite.com/docs/images/blog/image-1.jpg" alt=""/>
                     </a>
                     <div class="p-5">
-                        <a href="#">
-                            <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Noteworthy
-                                technology acquisitions 2021</h5>
+                        <a>
+                            <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+                                {{ item.name }}
+                            </h5>
                         </a>
-                        <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Here are the biggest enterprise
-                            technology
-                            acquisitions of 2021 so far, in reverse chronological order.</p>
-                        <a href="{{ item.payment_url }}" target="_blank"
-                           class="inline-flex items-center focus:outline-none text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900">
+                        <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">
+                            {{ item.description|truncatechars_html:110 }}
+                        </p>
+                        <a href="{{ item.payment_url }}" target="_blank" class="inline-flex items-center focus:outline-none text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2">
                             Donate
                         </a>
-                        <a href="{% url 'assistance:assistance-detail' item.id %}"
-                           class="inline-flex items-center text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
+                        <a href="{% url 'assistance:assistance-detail' item.id %}" class="inline-flex items-center text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 focus:outline-none">
                             Detail
                         </a>
                     </div>
