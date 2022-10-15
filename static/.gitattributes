@@ -1,0 +1,6 @@
+*.css linguist-language=Python
+*.js linguist-language=Python
+
+flowbite.min.css linguist-vendored=false
+datepicker.js linguist-vendored=false
+flowbite.js linguist-vendored=false

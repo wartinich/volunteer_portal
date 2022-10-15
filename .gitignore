@@ -17,7 +17,6 @@ venv
 *.egg
 
 assets
-static
 media
 
 dist
