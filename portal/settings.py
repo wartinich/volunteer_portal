@@ -85,13 +85,13 @@ WSGI_APPLICATION = 'portal.wsgi.application'
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': os.environ.get('POSTGRES_NAME'),
-        'USER': os.environ.get('POSTGRES_USER'),
-        'PASSWORD': os.environ.get('POSTGRES_PASSWORD'),
-        'HOST': 'localhost',
-        'PORT': os.environ.get('POSTGRES_PORT'),
+    "default": {
+        "ENGINE": "django.db.backends.postgresql_psycopg2",
+        "NAME": os.environ.get("POSTGRES_NAME"),
+        "USER": os.environ.get("POSTGRES_USER"),
+        "PASSWORD": os.environ.get("POSTGRES_PASSWORD"),
+        "HOST": os.environ.get("POSTGRES_HOST"),
+        "PORT": os.environ.get("POSTGRES_PORT"),
     }
 }
 
@@ -145,18 +145,101 @@ MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-AUTHENTICATION_BACKENDS = (
-    'social_core.backends.google.GoogleOAuth2',
-    'social_core.backends.facebook.FacebookOAuth2',
-    'django.contrib.auth.backends.ModelBackend',
-)
+# Logging
 
-SOCIAL_AUTH_URL_NAMESPACE = 'social'
+DJANGO_LOG_PATH = os.environ.get("DJANGO_LOG_PATH", os.path.join(BASE_DIR, ".data/django.log"))
+CELERY_LOG_PATH = os.environ.get("CELERY_LOG_PATH", os.path.join(BASE_DIR, ".data/celery.log"))
 
-REST_FRAMEWORK = {
-    'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema'
+if not os.path.exists(os.path.dirname(DJANGO_LOG_PATH)):
+    os.makedirs(os.path.dirname(DJANGO_LOG_PATH))
+
+if not os.path.exists(os.path.dirname(CELERY_LOG_PATH)):
+    os.makedirs(os.path.dirname(CELERY_LOG_PATH))
+
+LOGFILE_SIZE = 5 * 1024 * 1024
+
+LOGGING = {
+    "version": 1,
+    "disable_existing_loggers": False,
+    "formatters": {
+        "base": {
+            "format": "{levelname} | {asctime} | {module} | {process:d} | {thread:d} | {message}",
+            "style": "{",
+        },
+    },
+    "handlers": {
+        "console": {
+            "class": "logging.StreamHandler",
+        },
+        "base_file": {
+            "level": "DEBUG",
+            "class": "logging.handlers.RotatingFileHandler",
+            "filename": DJANGO_LOG_PATH,
+            "maxBytes": LOGFILE_SIZE,
+            "formatter": "base",
+        },
+        "celery_file": {
+            "level": "DEBUG",
+            "class": "logging.handlers.RotatingFileHandler",
+            "filename": CELERY_LOG_PATH,
+            "maxBytes": LOGFILE_SIZE,
+            "formatter": "base",
+        },
+    },
+    "loggers": {
+        "django": {
+            "handlers": ["console", "base_file"],
+            "level": os.environ.get("DJANGO_LOG_LEVEL", "INFO"),
+            "propagate": True,
+        },
+        "celery": {
+            "handlers": ["console", "celery_file"],
+            "level": os.environ.get("CELERY_LOG_LEVEL", "INFO"),
+            "propagate": True,
+        },
+    },
 }
 
+# Celery
+
+CELERY_BROKER_URL = os.environ.get("BROKER_URL")
+CELERY_RESULT_BACKEND = os.environ.get("RESULT_BROKER_URL")
+CELERY_TASK_DEFAULT_QUEUE = "django"
+
+# Cache
+
+CACHE_DEFAULT_TIMEOUT = 60 * 60 * 8
+CACHES = {
+    "default": {
+        "BACKEND": "django_redis.cache.RedisCache",
+        "LOCATION": os.environ.get("PAGE_CACHE_REDIS_URL"),
+        "OPTIONS": {
+            "CLIENT_CLASS": "django_redis.client.DefaultClient",
+            "MAX_ENTRIES": 5000,
+        },
+        "TIMEOUT": CACHE_DEFAULT_TIMEOUT,
+    }
+}
+
+# Social authentication
+
+AUTHENTICATION_BACKENDS = (
+    "social_core.backends.google.GoogleOAuth2",
+    "social_core.backends.facebook.FacebookOAuth2",
+    "django.contrib.auth.backends.ModelBackend",
+)
+
+SOCIAL_AUTH_URL_NAMESPACE = "social"
+
+# REST
+
+REST_FRAMEWORK = {
+    "DEFAULT_SCHEMA_CLASS": "rest_framework.schemas.coreapi.AutoSchema",
+    "DEFAULT_RENDERER_CLASSES": "rest_framework.renderers.JSONRenderer"
+}
+
+# GpaphQL
+
 GRAPHENE = {
-    'SCHEMA': 'api.schemas.schema'
+    "SCHEMA": "api.schemas.schema"
 }
