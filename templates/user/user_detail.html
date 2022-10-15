@@ -56,11 +56,16 @@
         </div>
     </div>
     <div class="text-sm font-medium text-center text-gray-500 border-b border-gray-200 dark:text-gray-400 dark:border-gray-700">
-        <ul class="flex flex-wrap -mb-px">
+        <ul class="flex justify-between">
             <li class="mr-2">
-                <a href="#"
-                   class="inline-block p-4 text-blue-600 rounded-t-lg border-b-2 border-blue-600 active dark:text-blue-500 dark:border-blue-500">Assistance</a>
+                <a class="inline-block p-3 text-blue-600 rounded-t-lg border-b-2 border-blue-600 active dark:text-blue-500 dark:border-blue-500">Assistance</a>
             </li>
+            {% if user == request.user %}
+            <li class="mr-2">
+                <a href="{% url 'assistance:assistance-create' %}"
+                   class="inline-block text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:text-blue-500 dark:border-blue-500">Add Assistance</a>
+            </li>
+            {% endif %}
         </ul>
     </div>
     <div class="mt-2 grid grid-cols-2 gap-2 pb-2">

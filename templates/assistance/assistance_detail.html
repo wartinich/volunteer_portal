@@ -1,39 +1,44 @@
 {% extends 'assistance/base.html' %}
 
 {% block content %}
-    <div class="pt-4 flex justify-center flex-col">
+    <div class="pt-4 flex justify-center">
         <div>
-            <img class="max-w-xl h-auto rounded-lg shadow-xl dark:shadow-gray-800" src="https://flowbite.com/docs/images/blog/image-1.jpg" alt="image description">
-        </div>
-        <div class="pt-6">
-            <div class="pb-3">
-                <span class="font-medium text-lg">Title</span>
-                <h1>{{ assistance.name }}</h1>
-            </div>
-            <div class="pb-3">
-                <span class="font-medium text-lg">Description</span>
-                <p>{{ assistance.description }}</p>
-            </div>
-            <div class="pb-3">
-                <span class="font-medium text-lg">Author</span>
-                <div class="flex items-center">
-                    <img class="w-8 h-8 rounded-full mr-2" src="https://flowbite.com/docs/images/people/profile-picture-5.jpg">
-                    <p class="font-normal">{{ assistance.user.first_name }} {{ assistance.user.last_name }}</p>
-                </div>
-            </div>
-            <div class="pb-3">
-                <span class="font-medium text-lg">Category</span>
-                <p>{{ assistance.category.name }}</p>
-            </div>
-            <div class="pb-3">
-                <span class="font-medium text-lg">Status</span>
-                <p>{{ assistance.status.value }}</p>
-            </div>
-            <div class="pb-3">
-                <p>{{ assistance.updated_at }}</p>
-            </div>
             <div>
-                <a class="inline-flex items-center focus:outline-none text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900" href="{{ assistance.payment_url }}">Donate</a>
+                <img class="max-w-xl h-auto rounded-lg shadow-xl dark:shadow-gray-800"
+                     src="https://flowbite.com/docs/images/blog/image-1.jpg" alt="image description">
+            </div>
+            <div class="pt-6">
+                <div class="pb-3">
+                    <span class="font-medium text-lg">Title</span>
+                    <h1>{{ assistance.name }}</h1>
+                </div>
+                <div class="pb-3">
+                    <span class="font-medium text-lg">Description</span>
+                    <p>{{ assistance.description }}</p>
+                </div>
+                <div class="pb-3">
+                    <span class="font-medium text-lg">Author</span>
+                    <div class="flex items-center">
+                        <img class="w-8 h-8 rounded-full mr-2"
+                             src="https://flowbite.com/docs/images/people/profile-picture-5.jpg">
+                        <p class="font-normal">{{ assistance.user.first_name }} {{ assistance.user.last_name }}</p>
+                    </div>
+                </div>
+                <div class="pb-3">
+                    <span class="font-medium text-lg">Category</span>
+                    <p>{{ assistance.category.name }}</p>
+                </div>
+                <div class="pb-3">
+                    <span class="font-medium text-lg">Status</span>
+                    <p>{{ assistance.status.value }}</p>
+                </div>
+                <div class="pb-3">
+                    <p>{{ assistance.updated_at }}</p>
+                </div>
+                <div>
+                    <a class="inline-flex items-center focus:outline-none text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900"
+                       href="{{ assistance.payment_url }}">Donate</a>
+                </div>
             </div>
         </div>
     </div>
