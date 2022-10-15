@@ -30,3 +30,5 @@ doc
 home.rst
 
 .pytest_cache
+
+.data
