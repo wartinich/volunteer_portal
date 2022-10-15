@@ -18,6 +18,7 @@ venv
 
 assets
 static
+media
 
 dist
 db.sqlite3

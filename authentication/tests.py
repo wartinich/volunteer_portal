@@ -11,7 +11,7 @@ def auth_data():
     }
 
 
-def test_login(client, auth_data):
+def test_login(client, db, auth_data):
     resp = client.post(reverse("authentication:login"), data=auth_data)
     assert resp.status_code == 200
 
