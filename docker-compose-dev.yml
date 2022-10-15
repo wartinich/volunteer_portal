@@ -2,6 +2,7 @@ version: "3"
 
 services:
   postgres:
+    platform: linux/x86_64
     image: postgres:14-alpine
     restart: always
     env_file:
