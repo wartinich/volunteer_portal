@@ -27,6 +27,7 @@ class Assistance(models.Model):
     image = models.FileField(
         verbose_name="image",
         upload_to="assistance/",
+        blank=True,
         null=True
     )
     payment_url = models.CharField(
